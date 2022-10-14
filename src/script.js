@@ -46,7 +46,7 @@ output.innerHTML = 16;
 
 const buildGrid = () => {
     // Remove old boxes
-    const removeBoxes = document.getElementsByClassName('box');
+    const removeBoxes = document.getElementsByClassName('box16');
     // Removing always shrinks array so index must always be 0
     while(removeBoxes.length > 0) {
         removeBoxes[0].parentNode.removeChild(removeBoxes[0]);
@@ -54,7 +54,7 @@ const buildGrid = () => {
     // Readd new boxes
     for(let i = 0; i < menuScale.value * menuScale.value; i++) {
         const createBoxes = document.createElement('div');
-        createBoxes.setAttribute('class', 'box');
+        createBoxes.setAttribute('class', 'box16');
         grid.appendChild(createBoxes);
     }
 }
