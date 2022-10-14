@@ -61,7 +61,6 @@ const buildGrid = () => {
         createBoxes.setAttribute('class', `box${menuScale.value}`);
         createBoxes.setAttribute('id', `box${i}`)
         grid.appendChild(createBoxes);
-        
     }
     events();
 }
@@ -72,8 +71,8 @@ const updateScaleValue = (e) => {
     removeGrid()
 }
 
-// Event on scale click
-menuScale.addEventListener('click', updateScaleValue);
+// Event on scale change
+menuScale.addEventListener('change', updateScaleValue)
   
 
 // Initial Grid
