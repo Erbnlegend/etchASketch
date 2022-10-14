@@ -1,0 +1,75 @@
+body {
+    margin: 0;
+    background-image: radial-gradient(circle,#112633, #0B1821, #112633);
+    color: #ffffff;
+}
+
+h1 {
+    text-align: center;
+}
+
+.container {
+    display: flex;
+}
+
+.container:first-of-type {
+    width: 75%;
+}
+
+.smallText {
+    font-size: 12px;
+    text-align: center;
+    margin-top: 1em;
+}
+
+#menu  {
+    
+}
+
+.menuContainer {
+    width: 220px;
+    margin: auto 0 auto auto;
+}
+
+#scaleValue {
+    display: flex;
+    padding: 1em;
+    background-color: #112633;
+    font-weight: bolder;
+    font-size: 32px;
+    align-items: center;
+}
+
+#slider {
+    display: flex;
+    flex-direction: column;
+}
+
+.menuButton {
+    padding: 1em;
+    font-size: 20px;
+    background-color: #112633;
+    border-right: 1px solid rgba(255, 255, 255, .7)
+}
+
+.menuButton:hover {
+    background-color: #255674;
+    cursor: pointer;
+}
+
+#grid {
+    display: flex;
+    flex-wrap: wrap;
+    width: 496px;
+    height: 496px;
+    padding: 25px;
+    margin: auto auto auto 0;
+}
+
+.box16 {
+    background-color: rgba(255, 255, 255);
+    flex: 1 0 calc(100% / 16);
+    height: 31px;
+    width: 31px;
+    font-size: 30px;
+}
