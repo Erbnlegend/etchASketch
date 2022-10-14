@@ -3,13 +3,18 @@ const menu = document.getElementById('menu');
 const slider = document.getElementById('slider');
 const grid = document.getElementById('grid');
 
+// Init Selection
+let grayscale = true;
+let rainbows = false;
+let eraser = false;
+
 
 
 // Menu List
 const menuList = {
     1: 'Grayscale',
     2: 'Rainbow',
-    3: 'Clear',
+    3: 'Reset',
     4: 'Eraser',
     5: [16,32,64]
 }
@@ -20,6 +25,7 @@ const buildMenu = () => {
         const createDiv = document.createElement('div');
         if(Object.hasOwn(menuList[prop], prop)) {
             createDiv.setAttribute('class', 'menuButton');
+            createDiv.setAttribute('id', menuList[prop]);
             createDiv.textContent = `${menuList[prop]}`;
             menu.appendChild(createDiv);
         } else {
@@ -72,7 +78,7 @@ const updateScaleValue = (e) => {
 }
 
 // Event on scale change
-menuScale.addEventListener('change', updateScaleValue)
+menuScale.addEventListener('change', updateScaleValue);
   
 
 // Initial Grid
@@ -86,18 +92,67 @@ const initGrid = () => {
 }
 initGrid()
 
-const colorMeGray = (e) => {
-    e.target.style.backgroundColor = "gray"
-}
-const colorMeRainbows = (e) => {
-    
+const colorMe = (e) => {
+    if(grayscale) {
+        e.target.style.backgroundColor = "gray";
+    }
+    if(rainbows) {
+        let randomColor = Math.floor(Math.random()*16777215).toString(16);
+        e.target.style.backgroundColor = `#${randomColor}`;
+    }
+    if(eraser) {
+        e.target.style.backgroundColor = "white";
+    }
 }
 
 // Color Event
 const events = (e) => {
     for(let i = 0; i < menuScale.value * menuScale.value; i++) {
         const hoverMe = document.getElementById(`box${[i]}`);
-        hoverMe.addEventListener('mouseover', colorMeGray);
+        hoverMe.addEventListener('mouseover', colorMe);
     }
 }
 events();
+
+// Event on Menu Buttons
+const menuSelections = (e) => {
+    if(e.target === grayscaleButton){
+        grayscale = true;
+        rainbows = false;
+        eraser = false;
+        grayscaleButton.classList.add('selected')
+        rainbowsButton.classList.remove('selected')
+        eraserButton.classList.remove('selected')
+    } else if(e.target === rainbowsButton) {
+        grayscale = false;
+        rainbows = true;
+        eraser = false;
+        grayscaleButton.classList.remove('selected')
+        rainbowsButton.classList.add('selected')
+        eraserButton.classList.remove('selected')
+    } else if(e.target === eraserButton) {
+        grayscale = false;
+        rainbows = false;
+        eraser = true;
+        grayscaleButton.classList.remove('selected')
+        rainbowsButton.classList.remove('selected')
+        eraserButton.classList.add('selected')
+    }
+}
+
+// Grayscale
+const grayscaleButton = document.getElementById('Grayscale');
+grayscaleButton.classList.add('selected')
+grayscaleButton.addEventListener('click', menuSelections);
+
+// Rainbows
+const rainbowsButton = document.getElementById('Rainbow');
+rainbowsButton.addEventListener('click', menuSelections);
+
+// Reset
+const resetButton = document.getElementById('Reset');
+resetButton.addEventListener('click', removeGrid);
+
+// Eraser
+const eraserButton = document.getElementById('Eraser');
+eraserButton.addEventListener('click', menuSelections);
