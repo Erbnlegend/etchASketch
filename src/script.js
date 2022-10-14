@@ -44,25 +44,32 @@ const output = document.getElementById('scaleValue');
 menuScale.value = 16
 output.innerHTML = 16;
 
-const buildGrid = () => {
-    // Remove old boxes
-    const removeBoxes = document.getElementsByClassName('box16');
+// Remove old boxes
+const removeGrid = () => {
+    const removeBoxes = grid.childNodes;
     // Removing always shrinks array so index must always be 0
     while(removeBoxes.length > 0) {
         removeBoxes[0].parentNode.removeChild(removeBoxes[0]);
     }
-    // Readd new boxes
+    buildGrid()
+}
+
+// Readd new boxes
+const buildGrid = () => {
     for(let i = 0; i < menuScale.value * menuScale.value; i++) {
         const createBoxes = document.createElement('div');
-        createBoxes.setAttribute('class', 'box16');
+        createBoxes.setAttribute('class', `box${menuScale.value}`);
+        createBoxes.setAttribute('id', `box${i}`)
         grid.appendChild(createBoxes);
+        
     }
+    events();
 }
 
 // Update grid value
 const updateScaleValue = (e) => {
     output.innerHTML = `${menuScale.value}`;
-    buildGrid()
+    removeGrid()
 }
 
 // Event on scale click
@@ -73,8 +80,25 @@ menuScale.addEventListener('click', updateScaleValue);
 const initGrid = () => {
     for(let i = 0; i < menuScale.value * menuScale.value; i++) {
     const createBoxes = document.createElement('div');
-    createBoxes.setAttribute('class', 'box16');
+    createBoxes.setAttribute('class', `box${menuScale.value}`);
+    createBoxes.setAttribute('id', `box${i}`)
     grid.appendChild(createBoxes);
     }
 }
 initGrid()
+
+const colorMeGray = (e) => {
+    e.target.style.backgroundColor = "gray"
+}
+const colorMeRainbows = (e) => {
+    
+}
+
+// Color Event
+const events = (e) => {
+    for(let i = 0; i < menuScale.value * menuScale.value; i++) {
+        const hoverMe = document.getElementById(`box${[i]}`);
+        hoverMe.addEventListener('mouseover', colorMeGray);
+    }
+}
+events();
